@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css
+  "
+    />
+    <title>Create-new-product</title>
+    <style>
+      form {
+        width: 50%;
+        margin: 50px auto;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 50px;
+        color: dodgerblue;
+      }
+      .btn {
+        width: 49%;
+        margin-bottom: 20px;
+        background-color: #04aa6d;
+        border: none;
+      }
+
+      a {
+        text-align: center;
+        display: block;
+        color: dodgerblue;
+      }
+
+      .flex {
+        margin-top: 120px;
+      }
+
+      #lien {
+        text-decoration: none;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="myform">
+      <h1>Create new product</h1>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name </label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          placeholder="Enter your product name here"
+        />
+        <p id="paraName" class="invalid-feedback">Name is required</p>
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input
+          type="number"
+          step="0.01"
+          class="form-control"
+          id="price"
+          placeholder="Enter your product price here"
+        />
+        <p id="paraPrice" class="invalid-feedback d-block"></p>
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input
+          type="number"
+          class="form-control"
+          id="quantity"
+          placeholder="Enter your product quantity here"
+        />
+        <p id="paraQuantity" class="invalid-feedback d-block"></p>
+      </div>
+      <div class="mb-3">
+        <label for="photo" class="form-label">add photo:</label>
+        <input type="file"
+       id="photo" name="photo"
+       accept="image/png, image/jpeg"
+       class="form-control"
+       >
+        <p id="paraPhoto" class="invalid-feedback">Photo is required</p>
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          style="height: 200px"
+          class="form-control"
+          maxlength="200"
+          id="description"
+          placeholder="Enter your product description here"
+        ></textarea>
+        <p id="paraDescription" class="invalid-feedback">
+          Description is required
+        </p>
+      </div>
+      <div class="mb-3">
+        <label for="select" class="form-label">Category</label>
+        <select
+          class="form-select"
+          id="select"
+          aria-label="Default select example"
+        >
+          <option selected id="selected">Open this select menu</option>
+          <option >One</option>
+          <option >Two</option>
+          <option >Three</option>
+        </select>
+        <p id="paraSelect" class="invalid-feedback">
+            Category is required
+          </p>
+      </div>
+
+      <div class="flex">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button class="btn btn-primary">
+          <a id="lien" href="http://127.0.0.1:5500/dashboard.html">Cancel</a>
+        </button>
+      </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js
+    "></script>
+
+    <script>
+      var form = document.getElementById("myform");
+
+      let name = document.getElementById("name");
+      let paraName = document.getElementById("paraName");
+      
+      let price = document.getElementById("price");
+      let paraPrice = document.getElementById("paraPrice");
+      
+      let quantity = document.getElementById("quantity");
+      let paraQuantity = document.getElementById("paraQuantity");
+      
+      let photo = document.getElementById("photo");
+      let paraPhoto = document.getElementById("paraPhoto");
+      
+      let description = document.getElementById("description");
+      let paraDescription = document.getElementById("paraDescription");
+      
+      let select = document.getElementById("select");
+      let paraSelect = document.getElementById("paraSelect");
+      let selected = document.getElementById("selected").value;
+
+
+      
+      form.addEventListener("submit", create)
+      
+      function create(e) {
+          e.preventDefault();
+      
+        if (name.value !== "") {
+            name.classList.add("is-valid");
+            name.classList.remove("is-invalid");
+            paraName.classList.remove("d-block");
+        } else {
+            name.classList.add("is-invalid");
+            name.classList.remove("is-valid");
+            paraName.classList.add("d-block");
+        }
+
+        if (price.value === "" || price.value <= 0) {
+            price.classList.add("is-invalid");
+            price.classList.remove("is-valid");
+            if (price.value ==="") {
+                paraPrice.innerText = "Price is required"
+            } else if (price.value <= 0) {
+                paraPrice.textContent = "Price should be over 0"
+            }
+        } else {
+                price.classList.add("is-valid");
+                price.classList.remove("is-invalid");
+                paraPrice.classList.remove("d-block");
+        }
+
+
+        if (quantity.value === "" || quantity.value <= 0) {
+            quantity.classList.add("is-invalid");
+            quantity.classList.remove("is-valid");
+            if (quantity.value ==="") {
+                paraQuantity.innerText = "Quantity is required"
+            } else if (quantity.value <= 0) {
+                paraQuantity.textContent = "Quantity should be over 0"
+            }
+        } else {
+            quantity.classList.add("is-valid");
+            quantity.classList.remove("is-invalid");
+            paraQuantity.classList.remove("d-block");
+        }
+
+
+        if (photo.value !== "") {
+            photo.classList.add("is-valid");
+            photo.classList.remove("is-invalid");
+            paraPhoto.classList.remove("d-block");
+        } else {
+            photo.classList.add("is-invalid");
+            photo.classList.remove("is-valid");
+            paraPhoto.classList.add("d-block");
+        }
+
+
+        if (description.value !== "") {
+            description.classList.add("is-valid");
+            description.classList.remove("is-invalid");
+            paraDescription.classList.remove("d-block");
+        } else {
+            description.classList.add("is-invalid");
+            description.classList.remove("is-valid");
+            paraDescription.classList.add("d-block");
+        }
+
+        if (select.value !== selected) {
+            select.classList.add("is-valid");
+            select.classList.remove("is-invalid");
+            paraSelect.classList.remove("d-block");
+        } else {
+            select.classList.add("is-invalid");
+            select.classList.remove("is-valid");
+            paraSelect.classList.add("d-block");
+        }
+
+        var nameValue = name.value
+        var priceValue = price.value
+        var quantityValue = quantity.value
+        var photoValue = photo.value
+        var descriptionValue = description.value
+        var selectValue = select.value
+
+
+
+      if ( nameValue && priceValue && quantityValue && photoValue && descriptionValue && selectValue !== ""  ) {
+
+        let produits =JSON.parse(localStorage.getItem("products")) || []
+        
+        produits.push(  {
+            nameValue:nameValue,
+            priceValue:priceValue,
+            quantityValue:quantityValue,
+            photoValue:photoValue,
+            descriptionValue:descriptionValue,
+            selectValue:selectValue
+        })
+        
+        
+        localStorage.setItem("products",JSON.stringify(produits))
+
+        
+        window.location.href = "http://127.0.0.1:5500/dashboard.html#"
+                
+        console.log(produits)   
+
+        
+
+
+
+
+    }
+    
+    
+
+
+      }
+    </script>
+  </body>
+</html>
